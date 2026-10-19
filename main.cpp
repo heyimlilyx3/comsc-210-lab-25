@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <chrono>
 #include <vector>
 #include <fstream>
@@ -8,7 +9,6 @@
 #include <iomanip>
 
 using namespace std;
-
 
 
 int main() {
@@ -84,8 +84,22 @@ int main() {
 
     inputFileSet.close();
 
+    // Now for sorting
 
-    
+    // vector sort
+    start = chrono::steady_clock::now();
+    sort(codes.begin(), codes.end());
+    end = chrono::steady_clock::now();
+    cout << "vector sort time: " << chrono::duration<double, milli>(end - start).count() << " milliseconds" << endl;
+
+    // list sort
+    start = chrono::steady_clock::now();
+    codeList.sort();
+    end = chrono::steady_clock::now();
+    cout << "list sort time: " << chrono::duration<double, milli>(end - start).count() << " milliseconds" << endl;
+
+    // set sort (not needed, as set is always sorted)
+    cout << "set sort time: -1 milliseconds (set is always sorted)" << endl;
 
     return 0;
 }
