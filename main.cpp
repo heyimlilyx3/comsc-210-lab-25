@@ -2,6 +2,7 @@
 #include <chrono>
 #include <vector>
 #include <fstream>
+#include <list>
 
 
 using namespace std;
@@ -9,11 +10,11 @@ using namespace std;
 
 
 int main() {
-    ifstream inputFile("numbers.txt");
+    ifstream inputFile("codes.txt");
     if (!inputFile) {
         cerr << "Error opening file." << endl;
         return 1;
-    
+    }
     // Start timing
     auto start = chrono::high_resolution_clock::now();
 
@@ -30,7 +31,22 @@ int main() {
     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
     cout << "vector input time: " << duration.count() << " milliseconds" << endl;
 
+    inputFile.close();
 
+    // Input into list
+    ifstream inputFileList("codes.txt");
+    if (!inputFileList) {
+        cerr << "Error opening file." << endl;
+        return 1;
+    }
+
+    // Start timing
+    start = chrono::high_resolution_clock::now();
+
+    list<int> codeList;
+    while (inputFileList >> code) {
+        codeList.push_back(code);
+    }
 
     return 0;
 }
