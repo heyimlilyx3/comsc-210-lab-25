@@ -7,6 +7,7 @@
 #include <set>
 #include <string>
 #include <iomanip>
+#include <iterator>
 
 using namespace std;
 
@@ -100,6 +101,26 @@ int main() {
 
     // set sort (not needed, as set is always sorted)
     cout << "set sort time: -1 milliseconds (set is always sorted)" << endl;
+
+    // Inserting
+
+    // vector insert
+    start = chrono::steady_clock::now();
+    codes.insert(codes.begin() + codes.size() / 2, "TESTCODE");
+    end = chrono::steady_clock::now();
+    cout << "vector insert time: " << chrono::duration<double, milli>(end - start).count() << " milliseconds" << endl;
+
+    // list insert
+    start = chrono::steady_clock::now();
+    codeList.insert(next(codeList.begin(), codeList.size() / 2), "TESTCODE");
+    end = chrono::steady_clock::now();
+    cout << "list insert time: " << chrono::duration<double, milli>(end - start).count() << " milliseconds" << endl;
+
+    // set insert
+    start = chrono::steady_clock::now();
+    codeSet.insert("TESTCODE");
+    end = chrono::steady_clock::now();
+    cout << "set insert time: " << chrono::duration<double, milli>(end - start).count() << " milliseconds" << endl;
 
     return 0;
 }
