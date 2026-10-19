@@ -86,6 +86,7 @@ int main() {
     inputFileSet.close();
 
     // Now for sorting
+    cout << endl;
 
     // vector sort
     start = chrono::steady_clock::now();
@@ -101,6 +102,8 @@ int main() {
 
     // set sort (not needed, as set is always sorted)
     cout << "set sort time: -1 milliseconds (set is always sorted)" << endl;
+
+    cout << endl;
 
     // Inserting
 
@@ -122,6 +125,26 @@ int main() {
     end = chrono::steady_clock::now();
     cout << "set insert time: " << chrono::duration<double, milli>(end - start).count() << " milliseconds" << endl;
 
+    cout << endl;
+    // Deleting
+
+    // delete middle element from vector
+    start = chrono::steady_clock::now();
+    codes.erase(codes.begin() + codes.size() / 2);
+    end = chrono::steady_clock::now();
+    cout << "vector delete time: " << chrono::duration<double, milli>(end - start).count() << " milliseconds" << endl;
+
+    // delete middle element from list
+    start = chrono::steady_clock::now();
+    codeList.erase(next(codeList.begin(), codeList.size() / 2));
+    end = chrono::steady_clock::now();
+    cout << "list delete time: " << chrono::duration<double, milli>(end - start).count() << " milliseconds" << endl;
+
+    // delete element from set
+    start = chrono::steady_clock::now();
+    codeSet.erase("TESTCODE");
+    end = chrono::steady_clock::now();
+    cout << "set delete time: " << chrono::duration<double, milli>(end - start).count() << " milliseconds" << endl;
     return 0;
 }
 
